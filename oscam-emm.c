@@ -357,6 +357,9 @@ void do_emm(struct s_client * client, EMM_PACKET *ep)
 
 		client->lastemm = time((time_t*)0);
 
+		if (aureader->csystem.emm_preprocess && !aureader->csystem.emm_preprocess(aureader, ep))
+			return;
+
 		client->emmok++;
 		if (client->account)
 			client->account->emmok++;
@@ -517,4 +520,30 @@ void do_emm_from_file(struct s_reader * reader)
 	reader->saveemm = save_saveemm;
 
 	free(eptmp);
+}
+
+void emm_sort_nanos(unsigned char *dest, const unsigned char *src, int32_t len)
+{
+	int32_t w = 0, c = -1, j = 0;
+	while(1) {
+		int32_t n = 256;
+		for (j = 0; j < len; ) {
+			int32_t l = src[j + 1] + 2;
+			if (src[j] == c) {
+				if (w + l > len) {
+					cs_debug_mask(D_EMM, "sortnanos: sanity check failed. Exceeding memory area. Probably corrupted nanos!");
+					memset(dest, 0, len); // zero out everything
+					return;
+				}
+				memcpy(&dest[w],&src[j],l);
+				w += l;
+			} else if (src[j] > c && src[j] < n) {
+				n = src[j];
+			}
+			j += l;
+		}
+		if (n >= 256)
+			break;
+		c = n;
+	}
 }

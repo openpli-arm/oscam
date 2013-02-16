@@ -178,6 +178,9 @@ endif (OSCamOperatingSystem MATCHES "Linux")
 set (CS_CONFDIR ${DEFAULT_CS_CONFDIR} CACHE STRING "Default path for the config files")
 add_definitions ("-DCS_CONFDIR=\\\"${CS_CONFDIR}\\\"")
 
+# Build config.mak and related files
+execute_process (COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/config.sh --make-config.mak)
+
 # Manage config.h based on command line parameters
 # Manipulate config file based on given parameters and read unset parameters
 

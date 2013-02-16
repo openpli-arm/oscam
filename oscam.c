@@ -1,6 +1,8 @@
 #include "globals.h"
 #include <getopt.h>
 
+#include "config.mak.h"
+
 #include "csctapi/cardreaders.h"
 #include "modules.h"
 #include "readers.h"
@@ -1517,6 +1519,9 @@ int32_t main (int32_t argc, char *argv[])
 	cs_close_log();
 
 	stop_garbage_collector();
+
+	// This prevents the compiler from removing bincfg from the final binary
+	memset(bincfg, 0, sizeof(bincfg));
 
 	return exit_oscam;
 }

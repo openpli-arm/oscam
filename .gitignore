@@ -8,3 +8,6 @@ Distribution/list_smargo-*
 
 # build directories
 /build/
+
+config.mak
+config.mak.h

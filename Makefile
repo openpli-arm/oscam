@@ -439,7 +439,7 @@ clean:
 	@-rm -rf $(BUILD_DIR) lib
 
 distclean: clean
-	@-for FILE in config.mak $(BINDIR)/list_smargo-* $(BINDIR)/oscam-$(VER)*; do \
+	@-for FILE in config.mak config.mak.h $(BINDIR)/list_smargo-* $(BINDIR)/oscam-$(VER)*; do \
 		echo "RM	$$FILE"; \
 		rm -rf $$FILE; \
 	done

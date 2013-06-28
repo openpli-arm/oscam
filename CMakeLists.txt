@@ -587,7 +587,7 @@ elseif (OSCamOperatingSystem MATCHES "AZBox")
     set_property(TARGET xcas PROPERTY IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/extapi/openxcas/libOpenXCASAPI.a)
     target_link_libraries(${exe_name} xcas)
 elseif (OSCamOperatingSystem MATCHES "SU980")
-    target_link_libraries(${exe_name} lnxcssUsr lnxUKAL tmplatHandle rt lnxplatUsr lnxscsUsr lnxnotifyqUsr)
+    target_link_libraries(${exe_name} rt entropic)
 endif (OSCamOperatingSystem MATCHES "Linux")
 
 #----------------------- put svnversion in the build ------------------------------
@@ -609,7 +609,7 @@ add_custom_target (
     touch ${CMAKE_CURRENT_SOURCE_DIR}/oscam-log.c
 )
 
-#execute_process (COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/config.sh --oscam-revision COMMAND tr -d '\n' OUTPUT_VARIABLE CS_SVN_VERSION)
+execute_process (COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/config.sh --oscam-revision COMMAND tr -d '\n' OUTPUT_VARIABLE CS_SVN_VERSION)
 add_definitions ("-D'CS_SVN_VERSION=\"${CS_SVN_VERSION}\"'")
 
 execute_process(COMMAND ${CMAKE_C_COMPILER} -dumpmachine COMMAND tr -d '\n' OUTPUT_VARIABLE CS_TARGET)

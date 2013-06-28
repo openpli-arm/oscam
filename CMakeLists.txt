@@ -158,6 +158,7 @@ elseif (OSCamOperatingSystem MATCHES "AZBox")
     set (USE_AZBOX "USE_AZBOX")
     set (DEFAULT_CS_CONFDIR "/PLUGINS/OpenXCAS/oscamCAS")
 elseif (OSCamOperatingSystem MATCHES "SU980")
+    set (USE_SU980 "USE_SU980")
     add_definitions ("-DWITH_SU980=1")
     set (DEFAULT_CS_CONFDIR "/var/tuxbox/config")
 elseif (OSCamOperatingSystem MATCHES "MCA")
@@ -415,7 +416,7 @@ GENERATE_OSCAM_CONFIG("${CMAKE_CURRENT_SOURCE_DIR}/config.h")
 # Build config.mak and related files
 # FIXME: Create USE_FLAGS and pass them to config.sh using --use-flags
 execute_process (COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/config.sh --objdir ${CMAKE_CURRENT_BINARY_DIR} --use-flags  "${USE_STAPI} ${USE_COOLAPI} /
-${USE_AZBOX} ${USE_MCA} ${USE_SSL} ${USE_LIBCRYPTO} ${USE_LIBUSB} ${USE_PCSC}" --make-config.mak)
+${USE_SU980} ${USE_AZBOX} ${USE_MCA} ${USE_SSL} ${USE_LIBCRYPTO} ${USE_LIBUSB} ${USE_PCSC}" --make-config.mak)
 # Generate webif/pages.c
 execute_process (COMMAND make --no-print-directory --quiet -C ${CMAKE_CURRENT_SOURCE_DIR}/webif)
 

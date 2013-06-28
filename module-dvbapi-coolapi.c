@@ -511,20 +511,16 @@ void cnxt_css_drv_term(void);
 void cnxt_smc_term ( void );
 
 int32_t  cool_kal_opened = 0;
-void coolapi_open_all()
+void coolapi_open_all(void)
 {
-	printf("coolapi_open_all start\n");
 	cnxt_kal_initialize();
 	cnxt_css_drv_init();
 	cnxt_smc_init (0);
 	cool_kal_opened = 1;
 }
 
-void coolapi_close_all()
+void coolapi_close_all(void)
 {
-	printf("coolapi_close_all start\n");
-	//cnxt_smc_term();
-	//cnxt_css_drv_term();
 	cnxt_kal_terminate();
 	cool_kal_opened = 0;
 }
